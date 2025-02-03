@@ -1,0 +1,10 @@
+   name: dependency-visualizer
+   channels:
+     - conda-forge
+     - defaults
+   dependencies:
+     - python=3.11
+     - pyqt
+     - matplotlib
+     - networkx
+     - scipy
