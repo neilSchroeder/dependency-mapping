@@ -70,15 +70,17 @@ conda activate dependency-visualizer
 
 1. Run the mapper to analyze your project:
 ```bash
-python mapper.py > dependencies.txt
+python src/mapper.py --path <path/to/directory/to/analyze> --output <tag_for_output>
 ```
+
+the output will be written to `cfg/<tag_for_output>.txt`
 
 2. Launch the visualizer:
 ```bash
-python visualizer.py
+python src/visualizer.py
 ```
 
-3. Click "Load Dependencies" and select your dependencies.txt file
+3. Click "Load Dependencies" and select the `cfg/<tag_for_output>.txt` file
 
 ## License
 
