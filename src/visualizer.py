@@ -1,6 +1,7 @@
 import colorsys
 import math
 import os
+import random
 import sys
 
 import matplotlib.patches as patches
@@ -33,12 +34,12 @@ layout_dict = {
 }
 
 
-def new_color_generator():
+def new_color_generator(rand_start=False):
     """
     Generator that continuously yields visually distinct colors in hex format.
     Instead of a fixed saturation/value, we alternate presets and change the hue step.
     """
-    h = 0.0
+    h = 0.0 if not rand_start else random.random()
     # Cycle saturation/value tuples for additional variation.
     sat_val_pairs = [(0.6, 0.95), (0.8, 0.90), (0.7, 0.92)]
     pair_index = 0
@@ -229,12 +230,15 @@ class DependencyViewer(QMainWindow):
         Returns:
             None
         Side Effects:
+            - Generates new colors for the directory structure with a random starting hue
             - Updates the directory color mapping
             - Redraws the graph visualization
         """
+        global COLOR_GENERATOR
         # do nothing if no directory color mapping
         if not self.dir_color_mapping:
             return
+        COLOR_GENERATOR = new_color_generator(rand_start=True)
         self.dir_color_mapping = {
             d: next(COLOR_GENERATOR) for d in self.dir_color_mapping.keys()
         }
@@ -434,8 +438,8 @@ class DependencyViewer(QMainWindow):
             )
 
         # Parameters for drawing concentric circles.
-        outer_radius = 0.03  # Radius for the outermost circle.
-        shrink_factor = 0.6  # Inner circle is 80% the size of its parent.
+        outer_radius = 0.04  # Radius for the outermost circle.
+        shrink_factor = 0.65  # Inner circle is 80% the size of its parent.
 
         # graph scale
 
@@ -469,7 +473,7 @@ class DependencyViewer(QMainWindow):
                 radius = outer_radius * (shrink_factor**i)
                 color = self.dir_color_mapping[d]
                 # Increase linewidth if this node is selected or a neighbor.
-                lw = 5
+                lw = 3
                 if node == selected:
                     lw = 8
                 elif node in neighbors:
@@ -481,7 +485,7 @@ class DependencyViewer(QMainWindow):
 
             # Draw the file marker as a filled circle inside the innermost circle.
             file_radius = (
-                outer_radius * (shrink_factor**n)
+                outer_radius * (shrink_factor ** (n + 1))
                 if n > 0
                 else outer_radius * shrink_factor
             )
