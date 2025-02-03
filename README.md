@@ -29,7 +29,7 @@ Each node represents a python file found in the package, and
 
 2) Node Select
 
-![Circular Layout](examples/images/dep_vis_circ.png)
+![Circular Layout](examples/images/dep_vis_circ_sel.png)
 
 Nodes can be selected by clicking on them.
 Selected nodes show up in bold white text, it's neighbors will show up in larger white font.
