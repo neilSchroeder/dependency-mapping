@@ -53,10 +53,11 @@ The color scheme of the nodes can be changed to be more appealing by pressing th
 
 ## Requirements
 
-- Python 3.x
+- Python 3.11
 - PyQt5
 - matplotlib
 - networkx
+- scipy
 
 ## Installation
 
