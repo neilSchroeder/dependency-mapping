@@ -1,3 +1,4 @@
+import argparse
 import ast
 import os
 from pathlib import Path
@@ -132,8 +133,32 @@ def analyze_and_visualize(project_path: str) -> str:
     return generate_mermaid(dependencies)
 
 
+def main():
+
+    # parse args
+
+    parser = argparse.ArgumentParser(
+        description="Generate a Mermaid graph of a Python project."
+    )
+    parser.add_argument("--path", type=str, help="The path to the project directory")
+    parser.add_argument("--output", type=str, help="The path to the output file")
+
+    args = parser.parse_args()
+
+    if not args.path:
+        parser.error("Please provide a project path")
+
+    # analyze path
+    mermaid_graph = analyze_and_visualize(args.path)
+
+    # write to output file
+    if args.output:
+        with open(f"cfg/{args.output}.txt", "w") as f:
+            f.write(mermaid_graph)
+    else:
+        print(mermaid_graph)
+
+
 # Example usage
 if __name__ == "__main__":
-    project_path = "/home/nschroed/Documents/work/cms-ecal-scales-and-smearings"
-    mermaid_graph = analyze_and_visualize(project_path)
-    print(mermaid_graph)
+    main()
