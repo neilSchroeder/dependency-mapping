@@ -61,9 +61,12 @@ The color scheme of the nodes can be changed to be more appealing by pressing th
 
 ## Installation
 
+This project uses `uv` to manage packages and virtual environments.
+
 ```bash
-conda env create -f environment.yml
-conda activate dependency-visualizer
+curl -LsSf https://astral.sh/uv/install.sh | sh
+uv sync
+source .venv/bin/activate
 ```
 
 ## Usage

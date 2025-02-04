@@ -1,6 +1,7 @@
 import colorsys
 import math
 import os
+import pickle
 import random
 import sys
 
@@ -297,10 +298,27 @@ class DependencyViewer(QMainWindow):
             self, "Open Dependency File", "", "Text Files (*.txt);;All Files (*)"
         )
         if filename:
-            self.parse_dependency_file(filename)
-            # clear the directory color mapping
-            self.dir_color_mapping = {}
-            self.draw_graph(recompute_layout=True)
+            if ".txt" in filename:
+                self.parse_dependency_file(filename)
+                # clear the directory color mapping
+                self.dir_color_mapping = {}
+                self.draw_graph(recompute_layout=True)
+            elif ".pkl" in filename:
+                with open(filename, "rb") as f:
+                    self.graph = pickle.load(f)
+                self.status_label.setText(
+                    f"Loaded {len(self.graph.nodes)} nodes and {len(self.graph.edges)} edges"
+                )
+                self.draw_graph(recompute_layout=True)
+            else:
+                raise ValueError("Invalid file format")
+
+        # pickle the graph
+        # get filename without extension, including the path
+        out_filename = os.path.basename(filename).split(".")[0]
+        out_filename = os.path.join(os.path.dirname(filename), out_filename)
+        with open(f"{out_filename}_graph.pkl", "wb") as f:
+            pickle.dump(self.graph, f)
 
     def parse_dependency_file(self, filename):
         """
@@ -459,9 +477,9 @@ class DependencyViewer(QMainWindow):
             directories = parts[:-1]  # Parent directories
             n = len(directories)
             # set subset key to the directory name
-            self.graph.nodes[node]["subset"] = (
-                directories[-1] if directories else "root"
-            )
+            self.graph.nodes[node]["subset"] = directories[-1] if n > 0 else "root"
+            if n == 0:
+                directories = ["root"]
 
             # Assign a color per directory name. Only generate new colors if Change Colors button is clicked
             for d in directories:
