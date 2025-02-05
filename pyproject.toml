@@ -8,5 +8,43 @@ dependencies = [
     "pyqt5",
     "matplotlib",
     "networkx",
-    "scipy"
+    "scipy",
+    "ruff",
+    "pre-commit",
+    "mypy",
+    "setuptools",
 ]
+
+[project.optional-dependencies]
+dev = [
+    "pre-commit",
+]
+
+[tool.setuptools]
+packages = ["dependency_mapping"]
+
+[tool.mypy]
+python_version = ">=3.10"
+warn_return_any = true
+warn_unused_configs = true
+check_untyped_defs = true
+
+[tool.pre-commit.hooks.ruff]
+id = "ruff"
+name = "ruff"
+entry = "ruff check . --fix"
+language = "python"
+types = ["python"]
+pass_filenames = false
+
+[tool.ruff]
+extend-select = [
+    "C4",  # comprehensions
+    "SIM", # simplification
+    "TCH", # type checking
+]
+ignore = []
+show-fixes = true
+target-version = "py311"
+
+

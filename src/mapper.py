@@ -1,8 +1,7 @@
 import argparse
 import ast
-import os
 from pathlib import Path
-from typing import Dict, List, Set
+from typing import Dict, Set
 
 
 class ImportAnalyzer(ast.NodeVisitor):

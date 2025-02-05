@@ -535,7 +535,7 @@ class DependencyViewer(QMainWindow):
                 # non-selected neighbors
                 f_color = "white"
                 f_size = 12
-            if selected != None and node not in neighbors and node != selected:
+            if selected is not None and node not in neighbors and node != selected:
                 # non-selected non-neighbors
                 f_color = "#c0c0c0"
                 f_size = 8
