@@ -25,7 +25,7 @@ Here are some examples of features the author finds most useful, and an explanat
 ![Circular Layout](examples/images/dep_vis_circ.png)
 
 This layout emphasizes cyclic dependencies and provides a clear overview of module relationships.
-Each node represents a python file found in the package, and 
+Each node represents a python file found in the package, and each node is colored by its parent folders.
 
 2) Node Select
 
@@ -42,7 +42,7 @@ Red arrows represent dependencies, i.e. in <selected.py> you fill find a `import
 
 ![Multipartite Layout](examples/images/dep_vis_multipartite_sel.png)
 
-The layout of the nodes can be changed to a range of options. The most useful tend to be `Circular`, `Arf`, and `Multipartite`. Changing layout preserves the state of the graph and does not clear selections.
+The layout of the nodes can be changed to a range of options. The most useful tend to be `Circular`, `Arf`, and `Multipartite` (which is structured by the folder structure of the project). Changing layout preserves the state of the graph and does not clear selections.
 
 4) Color Change Button
 
