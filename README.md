@@ -58,6 +58,10 @@ The color scheme of the nodes can be changed to be more appealing by pressing th
 - matplotlib
 - networkx
 - scipy
+- ruff
+- pre-commit
+- mypy
+- setuptools
 
 ## Installation
 
