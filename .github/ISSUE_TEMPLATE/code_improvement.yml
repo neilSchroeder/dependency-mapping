@@ -1,4 +1,4 @@
-name: Code Improvement
+name: ⚙️ Code Improvement
 description: Suggest an improvement to existing code
 title: "[CODE IMPROVEMENT]: "
 labels: ["enhancement", "code quality"]
@@ -27,21 +27,17 @@ body:
     validations:
       required: true
       
-  - type: dropdown
+  - type: checkboxes
     id: improvement_type
     attributes:
       label: Type of Improvement
       description: What type of improvement are you suggesting?
-      multiple: true
       options:
-        - Code organization
-        - Complexity reduction
-        - Documentation
-        - Performance optimization
-        - Readability improvement 
-        - Testing
-        - Warning mitigation
-        - Other
+        - label: Complexity (code is confusing)
+        - label: Performance optimization (code is too slow)
+        - label: Documentation (code is missing documentation)
+        - label: Testing (fixing warnings or adding tests)
+        - label: Other
     validations:
       required: true
       
@@ -62,12 +58,3 @@ body:
       placeholder: "I noticed this while working on..."
     validations:
       required: false
-      
-  - type: checkboxes
-    id: terms
-    attributes:
-      label: Code of Conduct
-      description: By submitting this issue, you agree to follow our contributor guidelines.
-      options:
-        - label: I agree to follow this project's Code of Conduct
-          required: true
